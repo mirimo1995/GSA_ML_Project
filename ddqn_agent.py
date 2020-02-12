@@ -170,7 +170,6 @@ if __name__ == '__main__':
     # initialize replay memory
     agent=DQN_agent(env,policy,target)
     
-     train model
     try:
         reward=agent.train(10000)
     except KeyboardInterrupt:
