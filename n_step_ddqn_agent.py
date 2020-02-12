@@ -103,19 +103,19 @@ class DQN_agent_N_Step:
     def test(self,n_episodes):
         test_reward=[]
         for episode in range(n_episodes):
-            obs = env.reset()
+            obs = self.env.reset()
             state = self.get_state(obs)
             reward_episode = 0.0
             done=False
             while not done:
                 with torch.no_grad():
                     action=self.policy(state.to("cuda")).max(1)[1].view(1,1)
-                obs,reward,done,info=env.step(action)
+                obs,reward,done,info=self.env.step(action)
                 reward_episode+=reward
                 state=self.get_state(obs)
                 if done:
                     print("Finished Episode {} with reward {}".format(episode, reward_episode))
-            env.close()
+            self.env.close()
             test_reward.append(reward_episode)
         return (test_reward)
 
